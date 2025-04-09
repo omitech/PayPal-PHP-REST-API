@@ -14,13 +14,13 @@ class Order
     }
 
     // Method to create the order
-    public function create(OrderData $data): string|void
+    public function create(OrderData $data): array
     {
         return $this->client->request('POST', '/v2/checkout/orders', $data->toPayPalFormat());
     }
 
     // Method to capture the order
-    public function capture(string $orderId): array|void
+    public function capture(string $orderId): array|null
     {
         $response = $this->client->request('POST', "/v2/checkout/orders/{$orderId}/capture");
 
