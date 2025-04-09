@@ -56,4 +56,9 @@ class BillingCycle
             ]
         ];
     }
+
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
 }

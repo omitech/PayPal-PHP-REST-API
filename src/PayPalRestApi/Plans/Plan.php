@@ -17,8 +17,7 @@ class Plan
         string $productId,
         string $name,
         string $description,
-        BillingCycle $billingCycle,
-        string $currency = 'USD'
+        BillingCycle $billingCycle
     ): array {
         return $this->client->request('POST', '/v1/billing/plans', [
             'product_id' => $productId,
@@ -31,7 +30,7 @@ class Plan
                 'auto_bill_outstanding' => true,
                 'setup_fee' => [
                     'value' => '0.00',
-                    'currency_code' => strtoupper($currency)
+                    'currency_code' => strtoupper($billingCycle->getCurrency())
                 ],
                 'setup_fee_failure_action' => 'CONTINUE',
                 'payment_failure_threshold' => 3
