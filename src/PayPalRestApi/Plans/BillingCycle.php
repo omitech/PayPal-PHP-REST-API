@@ -15,27 +15,30 @@ class BillingCycle
     private string $intervalUnit;
     private int $intervalCount;
     private string $tenureType;
-    private int $sequence;
-    private int $totalCycles;
     private float $price;
     private string $currency;
+    private int $sequence;
+    private int $totalCycles;
+    
 
     public function __construct(
         string $intervalUnit,
         int $intervalCount,
         string $tenureType,
-        int $sequence,
-        int $totalCycles,
         float $price,
         string $currency
+        int $sequence = 1,
+        int $totalCycles = 0,
+    
     ) {
         $this->intervalUnit = strtoupper($intervalUnit);
         $this->intervalCount = $intervalCount;
         $this->tenureType = strtoupper($tenureType);
-        $this->sequence = $sequence;
-        $this->totalCycles = $totalCycles;
         $this->price = $price;
         $this->currency = strtoupper($currency);
+        $this->sequence = $sequence;
+        $this->totalCycles = $totalCycles;
+        
     }
 
     public function toArray(): array
