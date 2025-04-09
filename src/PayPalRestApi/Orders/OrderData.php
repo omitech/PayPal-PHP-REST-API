@@ -7,22 +7,19 @@ class OrderData
     float string $amount;
     private string $currency;
     private string $description;
-    private string $returnUrl;
-    private string $cancelUrl;
+    private string $customId;
 
     // Constructor to initialize order data
     public function __construct(
         float $amount,
         string $currency,
+        string $customId,
         string $description,
-        string $returnUrl,
-        string $cancelUrl
     ) {
         $this->amount = $amount;
         $this->currency = $currency;
+        $this->customId = $customId;
         $this->description = $description;
-        $this->returnUrl = $returnUrl;
-        $this->cancelUrl = $cancelUrl;
     }
 
     // Getters for order data
@@ -41,33 +38,28 @@ class OrderData
         return $this->description;
     }
 
-    public function getReturnUrl(): string
+    public function getCustomId(): string
     {
-        return $this->returnUrl;
-    }
-
-    public function getCancelUrl(): string
-    {
-        return $this->cancelUrl;
+        return $this->customId;
     }
 
     // Convert order data to the format required by PayPal
     public function toPayPalFormat(): array
     {
         return [
-            'intent' => 'CAPTURE',
-            'purchase_units' => [
+            "intent" => "CAPTURE",
+            "purchase_units" => [
                 [
-                    'amount' => [
-                        'currency_code' => $this->getCurrency(),
-                        'value' => $this->getAmount()
+                    "custom_id" => $this->getCustomId(),
+                    "amount" => [
+                        "value" => $this->getAmount(),
+                        "currency_code" => $this->getCurrency(),
                     ],
-                    'description' => $this->getDescription()
+                    'description' => $this->getDescription(),
                 ]
             ],
-            'application_context' => [
-                'return_url' => $this->getReturnUrl(),
-                'cancel_url' => $this->getCancelUrl()
+            "application_context" => [
+                'shipping_preference' => 'NO_SHIPPING'
             ]
         ];
     }
