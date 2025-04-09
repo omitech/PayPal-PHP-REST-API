@@ -3,6 +3,7 @@
 namespace PayPalRestApi\Orders;
 
 use PayPalRestApi\Core\PayPalClient;
+use PayPalRestApi\Orders\Response\OrderResponse;
 
 class Order
 {
@@ -24,10 +25,6 @@ class Order
     {
         $response = $this->client->request('POST', "/v2/checkout/orders/{$orderId}/capture");
 
-        if ($response['status'] == 'COMPLETED') {
-            return $response; // Return the successful capture response
-        } else {
-            return null; // Handle failure cases
-        }        
+        return (new OrderResponse($response))->toArray();       
     }
 }
