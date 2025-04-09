@@ -72,7 +72,7 @@ class OrderResponse
         return [
             'id' => $this->getId(),
             'status' => $this->getStatus(),
-            'payer_email' => $this->getBuyerEmail(),
+            'payer_email' => $this->getPayerEmail(),
             'payer_id' => $this->getPayerId(),
             'purchase_amount' => $this->getPurchaseAmount(),
             'currency' => $this->getCurrency(),
