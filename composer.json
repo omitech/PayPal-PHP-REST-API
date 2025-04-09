@@ -1,0 +1,22 @@
+{
+    "name": "omitech/PayPal-PHP-REST-API",
+    "description": "PHP SDK for PayPal REST API",
+    "version": "1.0.0",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+      "psr-4": {
+        "PayPalRestApi\\": "src/PayPalRestApi/"
+      }
+    },
+    "require": {
+      "php": ">=8.0",
+      "guzzlehttp/guzzle": "^7.0"
+    },
+    "require-dev": {
+      "phpunit/phpunit": "^10"
+    },
+    "scripts": {
+      "test": "vendor/bin/phpunit"
+    }
+  }
