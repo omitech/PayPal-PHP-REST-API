@@ -27,7 +27,7 @@ class OrderResponse
         $this->currency = $response['purchase_units'][0]['payments']['captures'][0]['amount']['currency_code'] ?? 'XXX';
         
         // Extract custom ID
-        $this->customId = $response['purchase_units'][0]['captures'][0]['custom_id'];
+        $this->customId = $response['purchase_units'][0]['payments']['captures'][0]['custom_id'];
     }
 
     // Getter methods for each field
