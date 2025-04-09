@@ -4,7 +4,7 @@ namespace PayPalRestApi\Orders;
 
 class OrderData
 {
-    float string $amount;
+    private float $amount;
     private string $currency;
     private string $description;
     private string $customId;
