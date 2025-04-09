@@ -16,4 +16,4 @@ This repository contains a simple PHP wrapper for integrating PayPal's REST API 
 - Verify and process PayPal webhooks for subscription updates.
 - Custom exception handling for API errors.
 
-This packages supports only limited number of operaions, mainly focused on digital subscriptions.
+This package supports only limited number of operaions, mainly focused on digital subscriptions.
