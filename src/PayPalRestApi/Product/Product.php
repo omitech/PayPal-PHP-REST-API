@@ -17,6 +17,15 @@ class Product
         $this->client = $client;
     }
 
+    public function list(array $params = []): array
+    {
+        $query = http_build_query($params);
+        $uri = '/v1/catalogs/products' . ($query ? "?$query" : '');
+
+        return $this->client->request('GET', $uri);
+    }
+
+
     public function create(string $name, string $description = '', string $type = self::TYPE_SERVICE): array
     {
         return $this->client->request('POST', '/v1/catalogs/products', [
