@@ -53,4 +53,12 @@ class Plan
     {
         return $this->client->request('GET', "/v1/billing/plans/{$planId}");
     }
+  
+    public function list(array $params = []): array
+    {
+        $query = http_build_query($params);
+        $uri = '/v1/billing/plans' . ($query ? "?$query" : '');
+
+        return $this->client->request('GET', $uri);
+    }
 }
