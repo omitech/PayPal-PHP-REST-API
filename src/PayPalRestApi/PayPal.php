@@ -6,13 +6,14 @@ use PayPalRestApi\Core\PayPalClient;
 use PayPalRestApi\Plans\Plan;
 use PayPalRestApi\Subscriptions\Subscription;
 use PayPalRestApi\Product\Product;
-use PayPalRestApi\Order\Order;
+use PayPalRestApi\Orders\Order;
 
 class PayPal
 {
     public Plan $plan;
     public Subscription $subscription;
     public Product $product;
+    public Order $order;
 
     private PayPalClient $client;
 
