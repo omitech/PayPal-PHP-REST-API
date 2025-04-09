@@ -2,7 +2,7 @@
 
 namespace PayPalRestApi\Subscriptions;
 
-use PayPalRestApi\PayPalClient;
+use PayPalRestApi\Core\PayPalClient;
 
 class Subscription
 {

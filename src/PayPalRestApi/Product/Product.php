@@ -2,7 +2,7 @@
 
 namespace PayPalRestApi\Product;
 
-use PayPalRestApi\PayPalClient;
+use PayPalRestApi\Core\PayPalClient;
 
 class Product
 {

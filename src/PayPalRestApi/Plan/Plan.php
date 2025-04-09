@@ -2,7 +2,7 @@
 
 namespace PayPalRestApi\Plans;
 
-use PayPalRestApi\PayPalClient;
+use PayPalRestApi\Core\PayPalClient;
 
 class Plan
 {
