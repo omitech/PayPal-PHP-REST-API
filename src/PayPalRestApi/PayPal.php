@@ -9,7 +9,6 @@ use PayPalRestApi\Product\Product;
 
 class PayPal
 {
-    
     public Plan $plan;
     public Subscription $subscription;
     public Product $product;
@@ -25,5 +24,10 @@ class PayPal
         $this->plan = new Plan($this->client);
         $this->subscription = new Subscription($this->client);
         
+    }
+
+    public function getClient(): PayPalClient
+    {
+        return $this->client;
     }
 }

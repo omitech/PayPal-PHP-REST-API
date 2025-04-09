@@ -3,6 +3,7 @@
 namespace PayPalRestApi\Core;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class PayPalClient
 {
@@ -52,12 +53,18 @@ class PayPalClient
             $response = $this->http->request($method, $uri, $options);
             $decoded = json_decode((string) $response->getBody(), true); // Always return as array
             return $decoded ?? []; // fallback to empty array if decode fails
-        } catch (\GuzzleHttp\Exception\RequestException $e) {
-            // Optionally log or rethrow with custom exception
-            throw new \RuntimeException(
-                'PayPal API Request failed: ' . $e->getMessage(),
+        } catch (RequestException $e) {
+            // Log error or handle specific cases (e.g., retry on 500, etc.)
+            $responseBody = $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null;
+            $responseCode = $e->getResponse() ? $e->getResponse()->getStatusCode() : null;
+
+            // Throw a custom ApiException with relevant details
+            throw new ApiException(
+                "API request failed: " . $e->getMessage(),
                 $e->getCode(),
-                $e
+                $e,
+                $responseBody,
+                $responseCode
             );
         }
     }
