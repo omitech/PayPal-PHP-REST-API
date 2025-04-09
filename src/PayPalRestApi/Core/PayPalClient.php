@@ -48,8 +48,17 @@ class PayPalClient
             $options['body'] = json_encode($body);
         }
 
-        $response = $this->http->request($method, $uri, $options);
-        
-        return json_decode($response->getBody());
+        try {
+            $response = $this->http->request($method, $uri, $options);
+            $decoded = json_decode((string) $response->getBody(), true); // Always return as array
+            return $decoded ?? []; // fallback to empty array if decode fails
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            // Optionally log or rethrow with custom exception
+            throw new \RuntimeException(
+                'PayPal API Request failed: ' . $e->getMessage(),
+                $e->getCode(),
+                $e
+            );
+        }
     }
 }
