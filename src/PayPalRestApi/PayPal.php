@@ -6,6 +6,7 @@ use PayPalRestApi\Core\PayPalClient;
 use PayPalRestApi\Plans\Plan;
 use PayPalRestApi\Subscriptions\Subscription;
 use PayPalRestApi\Product\Product;
+use PayPalRestApi\Order\Order;
 
 class PayPal
 {
@@ -23,6 +24,7 @@ class PayPal
         $this->product = new Product($this->client);
         $this->plan = new Plan($this->client);
         $this->subscription = new Subscription($this->client);
+        $this->order = new Order($this->client);
         
     }
 
