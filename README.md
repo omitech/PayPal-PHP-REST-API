@@ -10,7 +10,7 @@ This repository contains a simple PHP wrapper for integrating PayPal's REST API 
 
 ## Features
 
-- Create and manage PayPal subscription or single payments plans.
+- Create and manage PayPal subscription plans or single orders .
 - Handle user subscriptions (create, update, cancel).
 - Handle oders (create, capture).
 - Verify and process PayPal webhooks for subscription updates.
