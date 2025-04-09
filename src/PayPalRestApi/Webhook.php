@@ -38,7 +38,7 @@ class Webhook
         try {
             $response = $this->client->request('POST', '/v1/notifications/verify-webhook-signature', $data);
             return isset($response['verification_status']) && $response['verification_status'] === 'SUCCESS';
-        } catch (ApiException) {
+        } catch (ApiException $e) {
             return false;
         }
     }
