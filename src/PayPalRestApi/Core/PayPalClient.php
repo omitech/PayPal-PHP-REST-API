@@ -51,7 +51,7 @@ class PayPalClient
 
         try {
             $response = $this->http->request($method, $uri, $options);
-            $decoded = json_decode((string) $response->getBody(), true); // Always return as array
+            $decoded = json_decode((string)$response->getBody()->getContents(), true); // Always return as array
             return $decoded ?? []; // fallback to empty array if decode fails
         } catch (RequestException $e) {
             // Log error or handle specific cases (e.g., retry on 500, etc.)
