@@ -41,12 +41,12 @@ class OrderResponse
         return $this->status;
     }
 
-    public function getPayerEmail(): string
+    public function getPayerEmail(): ?string
     {
         return $this->payerEmail;
     }
     
-    public function getPayerId(): string
+    public function getPayerId(): ?string
     {
         return $this->payerId; 
     }
@@ -61,7 +61,7 @@ class OrderResponse
         return $this->currency;
     }
 
-    public function getCustomId(): string
+    public function getCustomId(): ?string
     {
         return $this->customId;
     }
