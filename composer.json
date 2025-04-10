@@ -1,7 +1,7 @@
 {
   "name": "omitech/PayPal-PHP-REST-API",
   "description": "PHP SDK for PayPal REST API",
-  "version": "1.0.7",
+  "version": "..1",
   "type": "library",
   "license": "MIT",
   "autoload": {
