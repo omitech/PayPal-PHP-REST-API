@@ -19,8 +19,8 @@ class Plan
         string $name,
         string $description,
         BillingCycle $billingCycle
-    ): array {
-        return $this->client->request('POST', '/v1/billing/plans', [
+    ): PlanResponse {
+        $response =  $this->client->request('POST', '/v1/billing/plans', [
             'product_id' => $productId,
             'name' => $name,
             'description' => $description,
@@ -37,16 +37,8 @@ class Plan
                 'payment_failure_threshold' => $billingCycle->getFailureThreshold()
             ]
         ]);
-    }
 
-    public function activate(string $planId): array
-    {
-        return $this->client->request('POST', "/v1/billing/plans/{$planId}/activate");
-    }
-
-    public function deactivate(string $planId): array
-    {
-        return $this->client->request('POST', "/v1/billing/plans/{$planId}/deactivate");
+        return PlanResponse::fromApiResponse($response);
     }
 
     public function get(string $planId): PlanResponse
@@ -71,5 +63,15 @@ class Plan
         );
 
         return $plans;
+    }
+
+    public function activate(string $planId): array
+    {
+        return $this->client->request('POST', "/v1/billing/plans/{$planId}/activate");
+    }
+
+    public function deactivate(string $planId): array
+    {
+        return $this->client->request('POST', "/v1/billing/plans/{$planId}/deactivate");
     }
 }
