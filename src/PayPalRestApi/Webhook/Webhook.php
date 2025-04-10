@@ -1,6 +1,6 @@
 <?php
 
-namespace PayPalRestApi;
+namespace PayPalRestApi\Webhook;
 
 use PayPalRestApi\Core\PayPalClient;
 use PayPalRestApi\Core\ApiException;

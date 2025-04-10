@@ -7,6 +7,7 @@ use PayPalRestApi\Plans\Plan;
 use PayPalRestApi\Subscriptions\Subscription;
 use PayPalRestApi\Product\Product;
 use PayPalRestApi\Orders\Order;
+use PayPalRestApi\Webhook\Webhook;
 
 class PayPal
 {
@@ -37,5 +38,10 @@ class PayPal
     public function preferRepresentation()
     {
         return $this->client->preferRepresentation(true);
+    }
+
+    public function webhook($webhookId)
+    {
+        return new Webhook($this->client, $webhookId);
     }
 }
