@@ -8,9 +8,9 @@ class ProductResponse
     private string $name;
     private string $description;
     private string $type;
-    private string $category;
-    private string $imageUrl;
-    private string $homeUrl;
+    private ?string $category;
+    private ?string $imageUrl;
+    private ?string $homeUrl;
     private string $createTime;
     private string $updateTime;
     private array $links;
