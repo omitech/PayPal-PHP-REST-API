@@ -3,6 +3,7 @@
 namespace PayPalRestApi\Plans;
 
 use PayPalRestApi\Core\PayPalClient;
+use PayPalRestApi\Plans\Response\PlanResponse;
 
 class Plan
 {
@@ -58,6 +59,15 @@ class Plan
         $query = http_build_query($params);
         $uri = '/v1/billing/plans' . ($query ? "?$query" : '');
 
-        return $this->client->request('GET', $uri);
+        // Get the raw plans from PayPal API
+        $response = $this->client->request('GET', $uri);
+
+        // Map each plan array into a PlanResponse object
+        $plans = array_map(
+            fn(array $planData) => PlanResponse::fromApiResponse($planData),
+            $response['plans'] ?? []
+        );
+
+        return $plans;
     }
 }
