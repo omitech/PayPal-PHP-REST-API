@@ -29,11 +29,11 @@ class Plan
             'payment_preferences' => [
                 'auto_bill_outstanding' => true,
                 'setup_fee' => [
-                    'value' => '0.00',
+                    'value' => $billingCycle->getSetupFee(),
                     'currency_code' => strtoupper($billingCycle->getCurrency())
                 ],
                 'setup_fee_failure_action' => 'CONTINUE',
-                'payment_failure_threshold' => 3
+                'payment_failure_threshold' => $billingCycle->getFailureThreshold()
             ]
         ]);
     }

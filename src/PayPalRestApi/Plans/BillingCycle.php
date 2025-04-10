@@ -19,17 +19,19 @@ class BillingCycle
     private string $currency;
     private int $sequence;
     private int $totalCycles;
-    
+    private int $failure_threshold;
+    private float $setup_fee;
 
     public function __construct(
         string $intervalUnit,
         int $intervalCount,
         string $tenureType,
         float $price,
-        string $currency
+        string $currency,
         int $sequence = 1,
         int $totalCycles = 0,
-    
+        int $failure_threshold = 3,
+        float $setup_fee = 0,
     ) {
         $this->intervalUnit = strtoupper($intervalUnit);
         $this->intervalCount = $intervalCount;
@@ -38,7 +40,8 @@ class BillingCycle
         $this->currency = strtoupper($currency);
         $this->sequence = $sequence;
         $this->totalCycles = $totalCycles;
-        
+        $this->failure_threshold = $failure_threshold;
+        $this->setup_fee = $setup_fee;
     }
 
     public function toArray(): array
@@ -63,5 +66,15 @@ class BillingCycle
     public function getCurrency()
     {
         return $this->currency;
+    }
+
+    public function getFailureThreshold()
+    {
+        return $this->failure_threshold;
+    }
+
+    public function getSetupFee()
+    {
+        return number_format($this->setup_fee, 2, '.', '');
     }
 }
