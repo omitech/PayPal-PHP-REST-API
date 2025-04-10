@@ -22,21 +22,30 @@ jobs:
     - name: Get current version from composer.json
       id: get_version
       run: |
-        current_version=$(jq -r '.version' composer.json)
+        # Extract version from composer.json and strip leading/trailing whitespace
+        current_version=$(jq -r '.version' composer.json | sed 's/^[ \t]*//;s/[ \t]*$//')
         echo "Current version: $current_version"
         echo "version=$current_version" >> $GITHUB_ENV
 
     - name: Bump patch version in composer.json
       run: |
+        # Extract major, minor, patch versions
         current_version=$VERSION
         IFS='.' read -r major minor patch <<< "$current_version"
+
+        # Increment the patch version
         patch=$((patch + 1))
+
+        # Create the new version
         new_version="$major.$minor.$patch"
         echo "New version: $new_version"
+
+        # Update composer.json with the new version
         jq ".version = \"$new_version\"" composer.json > temp.json && mv temp.json composer.json
 
     - name: Commit and push changes
       run: |
+        # Commit and push the updated composer.json
         git config user.name "github-actions"
         git config user.email "github-actions@github.com"
         git add composer.json
