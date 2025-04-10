@@ -17,5 +17,3 @@ This repository contains a simple PHP wrapper for integrating PayPal's REST API 
 - Custom exception handling for API errors.
 
 This package supports only limited number of operaions, mainly focused on digital subscriptions.
-
-04-10-2025: added bump-composer-version.yml
