@@ -56,24 +56,54 @@ class BillingCycle
             'total_cycles' => $this->totalCycles,
             'pricing_scheme' => [
                 'fixed_price' => [
-                    'value' => number_format($this->price, 2, '.', ''),
+                    'value' => $this->getPrice(),
                     'currency_code' => $this->currency
                 ]
             ]
         ];
     }
 
-    public function getCurrency()
+    public function getIntervalUnit(): string
+    {
+        return $this->intervalUnit;
+    }
+
+    public function getIntervalCount(): int
+    {
+        return $this->intervalCount;
+    }
+
+    public function getTenureType(): string
+    {
+        return $this->tenureType;
+    }
+
+    public function getPrice(): float
+    {
+        return number_format($this->price, 2, '.', '');
+    }
+
+    public function getCurrency(): string
     {
         return $this->currency;
     }
 
-    public function getFailureThreshold()
+    public function getSequence(): int
+    {
+        return $this->sequence;
+    }
+
+    public function getTotalCycles(): int
+    {
+        return $this->totalCycles;
+    }
+
+    public function getFailureThreshold(): int
     {
         return $this->failure_threshold;
     }
 
-    public function getSetupFee()
+    public function getSetupFee(): string
     {
         return number_format($this->setup_fee, 2, '.', '');
     }
