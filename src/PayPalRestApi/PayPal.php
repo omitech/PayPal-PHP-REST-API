@@ -33,4 +33,9 @@ class PayPal
     {
         return $this->client;
     }
+
+    public function preferRepresentation()
+    {
+        return $this->client->preferRepresentation(true);
+    }
 }

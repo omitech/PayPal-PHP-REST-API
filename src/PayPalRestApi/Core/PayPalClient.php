@@ -13,6 +13,8 @@ class PayPalClient
     protected string $accessToken;
     protected Client $http;
 
+    private bool $returnRepresentation = false;
+
     public function __construct(string $clientId, string $clientSecret, bool $sandbox)
     {
         $this->clientId = $clientId;
@@ -45,10 +47,15 @@ class PayPalClient
             ]
         ];
 
+        // Include the Prefer header if the flag is true
+        if ($returnRepresentation) {
+            $options['headers']['Prefer'] = 'return=representation';
+        }
+
         if ($body !== null) {
             $options['body'] = json_encode($body);
         }
-
+        
         try {
             $response = $this->http->request($method, $uri, $options);
             $decoded = json_decode((string)$response->getBody()->getContents(), true); // Always return as array
@@ -67,5 +74,10 @@ class PayPalClient
                 $responseCode
             );
         }
+    }
+
+    public function preferRepresentation(bool $flag = true)
+    {
+        $this->returnRepresentation = $flag;
     }
 }
