@@ -15,16 +15,18 @@ class Order
     }
 
     // Method to create the order
-    public function create(OrderData $data): array
+    public function create(OrderData $data): OrderResponse
     {
-        return $this->client->request('POST', '/v2/checkout/orders', $data->toPayPalFormat());
+        $response = $this->client->request('POST', '/v2/checkout/orders', $data->toPayPalFormat());
+
+        return new OrderResponse($response);   
     }
 
     // Method to capture the order
-    public function capture(string $orderId): array|null
+    public function capture(string $orderId): OrderResponse
     {
         $response = $this->client->request('POST', "/v2/checkout/orders/{$orderId}/capture");
 
-        return (new OrderResponse($response))->toArray();       
+        return new OrderResponse($response);       
     }
 }
