@@ -53,6 +53,9 @@ class Plan
         $query = http_build_query($params);
         $uri = '/v1/billing/plans' . ($query ? "?$query" : '');
 
+        // detailed output
+        $this->client->preferRepresentation();
+
         // Get the raw plans from PayPal API
         $response = $this->client->request('GET', $uri);
 
