@@ -1,0 +1,44 @@
+name: Auto Bump Composer Version
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up PHP
+      uses: actions/setup-php@v2
+      with:
+        php-version: '8.1'  # Set the PHP version your project uses
+
+    - name: Get current version from composer.json
+      id: get_version
+      run: |
+        current_version=$(jq -r '.version' composer.json)
+        echo "Current version: $current_version"
+        echo "version=$current_version" >> $GITHUB_ENV
+
+    - name: Bump patch version in composer.json
+      run: |
+        current_version=$VERSION
+        IFS='.' read -r major minor patch <<< "$current_version"
+        patch=$((patch + 1))
+        new_version="$major.$minor.$patch"
+        echo "New version: $new_version"
+        jq ".version = \"$new_version\"" composer.json > temp.json && mv temp.json composer.json
+
+    - name: Commit and push changes
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add composer.json
+        git commit -m "chore(release): bump version to $new_version"
+        git push origin main
