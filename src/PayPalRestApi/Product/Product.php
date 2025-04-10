@@ -3,6 +3,7 @@
 namespace PayPalRestApi\Product;
 
 use PayPalRestApi\Core\PayPalClient;
+use PayPalRestApi\Product\Response\ProductResponse;
 
 class Product
 {
@@ -22,21 +23,35 @@ class Product
         $query = http_build_query($params);
         $uri = '/v1/catalogs/products' . ($query ? "?$query" : '');
 
-        return $this->client->request('GET', $uri);
+        // detailed output
+        $this->client->preferRepresentation();
+        $response = $this->client->request('GET', $uri);
+
+        // Map each plan array into a ProductResponse object
+        $products = array_map(
+            fn(array $product) => new ProductResponse($product),
+            $response['products'] ?? []
+        );
+
+        return $products;
+
     }
 
-
-    public function create(string $name, string $description = '', string $type = self::TYPE_SERVICE): array
+    public function create(string $name, string $description = '', string $type = self::TYPE_SERVICE): ProductResponse
     {
-        return $this->client->request('POST', '/v1/catalogs/products', [
+        $response =  $this->client->request('POST', '/v1/catalogs/products', [
             'name' => $name,
             'description' => $description,
             'type' => $type
         ]);
+
+        return new ProductResponse($response);
     }
 
-    public function get(string $productId): array
+    public function get(string $productId): ProductResponse
     {
-        return $this->client->request('GET', "/v1/catalogs/products/{$productId}");
+        $response = $this->client->request('GET', "/v1/catalogs/products/{$productId}");
+
+        return new ProductResponse($response);
     }
 }

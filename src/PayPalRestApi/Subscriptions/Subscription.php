@@ -3,6 +3,7 @@
 namespace PayPalRestApi\Subscriptions;
 
 use PayPalRestApi\Core\PayPalClient;
+use PayPalRestApi\Subscriptions\Response\SubscriptionResponse;
 
 class Subscription
 {
@@ -13,14 +14,18 @@ class Subscription
         $this->client = $client;
     }
     
-    public function create(SubscriptionData $subscriptionData): array
+    public function create(SubscriptionData $subscriptionData): SubscriptionResponse
     {
-        return $this->client->request('POST', '/v1/billing/subscriptions', $subscriptionData->toArray());
+        $response = $this->client->request('POST', '/v1/billing/subscriptions', $subscriptionData->toArray());
+
+        return new SubscriptionResponse($responseBody);
     }
 
-    public function get(string $subscriptionId): array
+    public function get(string $subscriptionId): SubscriptionResponse
     {
-        return $this->client->request('GET', "/v1/billing/subscriptions/{$subscriptionId}");
+        $response = $this->client->request('GET', "/v1/billing/subscriptions/{$subscriptionId}");
+
+        return new SubscriptionResponse($responseBody);
     }
 
     public function cancel(string $subscriptionId, string $reason = ''): array
