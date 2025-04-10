@@ -49,9 +49,11 @@ class Plan
         return $this->client->request('POST', "/v1/billing/plans/{$planId}/deactivate");
     }
 
-    public function get(string $planId): array
+    public function get(string $planId): PlanResponse
     {
-        return $this->client->request('GET', "/v1/billing/plans/{$planId}");
+        $response = $this->client->request('GET', "/v1/billing/plans/{$planId}");
+
+        return PlanResponse::fromApiResponse($response);
     }
   
     public function list(array $params = []): array
