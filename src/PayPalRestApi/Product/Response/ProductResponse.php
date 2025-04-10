@@ -8,9 +8,6 @@ class ProductResponse
     private string $name;
     private string $description;
     private string $type;
-    private ?string $category;
-    private ?string $imageUrl;
-    private ?string $homeUrl;
     private string $createTime;
     private string $updateTime;
     private array $links;
@@ -21,9 +18,6 @@ class ProductResponse
         $this->name = $response['name'];
         $this->description = $response['description'];
         $this->type = $response['type'];
-        $this->category = $response['category'];
-        $this->imageUrl = $response['image_url'];
-        $this->homeUrl = $response['home_url'];
         $this->createTime = $response['create_time'];
         $this->updateTime = $response['update_time'];
         $this->links = $response['links'];
@@ -47,21 +41,6 @@ class ProductResponse
     public function getType(): string
     {
         return $this->type;
-    }
-
-    public function getCategory(): string
-    {
-        return $this->category;
-    }
-
-    public function getImageUrl(): string
-    {
-        return $this->imageUrl;
-    }
-
-    public function getHomeUrl(): string
-    {
-        return $this->homeUrl;
     }
 
     public function getCreateTime(): string
