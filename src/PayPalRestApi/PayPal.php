@@ -40,7 +40,7 @@ class PayPal
         return $this->client->preferRepresentation(true);
     }
 
-    public function webhook($webhookId)
+    public function webhook(string $webhookId): Webhook
     {
         return new Webhook($this->client, $webhookId);
     }
