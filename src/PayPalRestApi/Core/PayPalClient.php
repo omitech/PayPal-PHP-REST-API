@@ -48,7 +48,7 @@ class PayPalClient
         ];
 
         // Include the Prefer header if the flag is true
-        if ($returnRepresentation) {
+        if ($this->returnRepresentation) {
             $options['headers']['Prefer'] = 'return=representation';
         }
 
