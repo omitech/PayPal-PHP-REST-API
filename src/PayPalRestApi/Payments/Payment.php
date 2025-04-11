@@ -5,7 +5,7 @@ namespace PayPalRestApi\Payments;
 use PayPalRestApi\Core\PayPalClient;
 use PayPalRestApi\Payments\Response\PaymentResponse;
 
-class Payments
+class Payment
 {
     private PayPalClient $client;
 
