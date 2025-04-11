@@ -11,6 +11,7 @@ class OrderResponse
     private float $purchaseAmount;
     private string $currency;
     private ?string $customId;
+    private ?string $paymentId; 
 
     // Constructor to initialize the response data
     public function __construct(array $response)
@@ -28,6 +29,9 @@ class OrderResponse
         
         // Extract custom ID
         $this->customId = $response['purchase_units'][0]['payments']['captures'][0]['custom_id'];
+
+        // Extract payment ID
+        $this->paymentId = $response['purchase_units'][0]['payments']['captures'][0]['id'] ?? null;
     }
 
     // Getter methods for each field
@@ -66,6 +70,11 @@ class OrderResponse
         return $this->customId;
     }
 
+    public function getPaymentId(): ?string
+    {
+        return $this->paymentId;
+    }
+
     // Method to return parsed details as an associative array
     public function toArray(): array
     {
@@ -76,7 +85,8 @@ class OrderResponse
             'payer_id' => $this->getPayerId(),
             'purchase_amount' => $this->getPurchaseAmount(),
             'currency' => $this->getCurrency(),
-            'custom_id' => $this->getCustomId()
+            'custom_id' => $this->getCustomId(),
+            'payment_id' => $this->getPaymentId(),
         ];
     }
 }
