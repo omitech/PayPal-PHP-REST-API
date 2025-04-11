@@ -14,6 +14,7 @@ class SubscriptionResponse
     private ?array $shippingAmount;
     private array $subscriber;
     private string $createTime;
+    private ?string $customId;
     private array $links;
 
     public function __construct(array $response)
@@ -28,6 +29,7 @@ class SubscriptionResponse
         $this->shippingAmount = $response['shipping_amount'];
         $this->subscriber = $response['subscriber'];
         $this->createTime = $response['create_time'];
+        $this->customId = $response['custom_id'];
         $this->links = $response['links'];
     }
 
@@ -81,6 +83,11 @@ class SubscriptionResponse
         return $this->createTime;
     }
 
+    public function getCustomId(): string
+    {
+        return $this->customId;
+    }
+
     public function getLinks(): array
     {
         return $this->links;
@@ -93,6 +100,7 @@ class SubscriptionResponse
             'status' => $this->status,
             'status_update_time' => $this->statusUpdateTime,
             'plan_id' => $this->planId,
+            'custom_id' => $this->customId,
             'plan_overridden' => $this->planOverridden,
             'start_time' => $this->startTime,
             'quantity' => $this->quantity,
