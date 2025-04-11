@@ -10,8 +10,8 @@ class SubscriptionResponse
     private string $planId;
     private bool $planOverridden;
     private string $startTime;
-    private string $quantity;
-    private array $shippingAmount;
+    private ?string $quantity;
+    private ?array $shippingAmount;
     private array $subscriber;
     private string $createTime;
     private array $links;
@@ -61,12 +61,12 @@ class SubscriptionResponse
         return $this->startTime;
     }
 
-    public function getQuantity(): string
+    public function getQuantity(): ?string
     {
         return $this->quantity;
     }
 
-    public function getShippingAmount(): array
+    public function getShippingAmount(): ?array
     {
         return $this->shippingAmount;
     }
