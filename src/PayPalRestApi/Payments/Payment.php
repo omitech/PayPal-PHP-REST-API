@@ -17,7 +17,7 @@ class Payment
     // Method to get payment details (authorized payment)
     public function get(string $paymentId): PaymentResponse
     {
-        $response = $this->client->request('GET', "/v2/checkout/payments/{$paymentId}");
+        $response = $this->client->request('GET', "/v2/payments/authorizations/{$paymentId}");
 
         return new PaymentResponse($response);
     }      
