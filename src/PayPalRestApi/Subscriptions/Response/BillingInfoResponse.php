@@ -16,11 +16,9 @@ class BillingInfoResponse
     private string $nextBillingTime;
     private int $failedPaymentsCount;
 
-    public function __construct(array $response)
+    public function __construct(array $billingInfo)
     {
-        if (empty($response)) return null;
-         
-        $billingInfo = $response['billing_info'] ?? [];
+        if (empty($billingInfo)) return null;
 
         // Outstanding Balance
         $this->outstandingBalance = (float) ($billingInfo['outstanding_balance']['value'] ?? 0.0);
