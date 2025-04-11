@@ -4,6 +4,7 @@ namespace PayPalRestApi\Payments;
 
 use PayPalRestApi\Core\PayPalClient;
 use PayPalRestApi\Payments\Response\PaymentResponse;
+use PayPalRestApi\Payments\Response\CaptureResponse;
 
 class Payment
 {
