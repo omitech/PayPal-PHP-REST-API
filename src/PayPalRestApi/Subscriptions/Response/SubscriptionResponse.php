@@ -2,6 +2,8 @@
 
 namespace PayPalRestApi\Subscriptions\Response;
 
+use PayPalRestApi\Subscriptions\Response\BillingInfoResponse;
+
 class SubscriptionResponse
 {
     private string $id;
@@ -10,11 +12,10 @@ class SubscriptionResponse
     private string $planId;
     private bool $planOverridden;
     private string $startTime;
-    private ?string $quantity;
-    private ?array $shippingAmount;
     private array $subscriber;
     private string $createTime;
     private ?string $customId;
+    private ?BillingInfoResponse $billingInfo;
     private array $links;
 
     public function __construct(array $response)
@@ -25,12 +26,11 @@ class SubscriptionResponse
         $this->planId = $response['plan_id'];
         $this->planOverridden = $response['plan_overridden'];
         $this->startTime = $response['start_time'];
-        $this->quantity = $response['quantity'];
-        $this->shippingAmount = $response['shipping_amount'];
         $this->subscriber = $response['subscriber'];
         $this->createTime = $response['create_time'];
         $this->customId = $response['custom_id'];
         $this->links = $response['links'];
+        $this->billingInfo = new BillingInfoResponse($response['billing_info'] ?? []);
     }
 
     public function getId(): string
@@ -63,16 +63,6 @@ class SubscriptionResponse
         return $this->startTime;
     }
 
-    public function getQuantity(): ?string
-    {
-        return $this->quantity;
-    }
-
-    public function getShippingAmount(): ?array
-    {
-        return $this->shippingAmount;
-    }
-
     public function getSubscriber(): array
     {
         return $this->subscriber;
@@ -83,9 +73,14 @@ class SubscriptionResponse
         return $this->createTime;
     }
 
-    public function getCustomId(): string
+    public function getCustomId(): ?string
     {
         return $this->customId;
+    }
+
+    public function getBillingInfo(): ?BillingInfoResponse
+    {
+        return $this->billingInfo;
     }
 
     public function getLinks(): array
@@ -103,10 +98,9 @@ class SubscriptionResponse
             'custom_id' => $this->customId,
             'plan_overridden' => $this->planOverridden,
             'start_time' => $this->startTime,
-            'quantity' => $this->quantity,
-            'shipping_amount' => $this->shippingAmount,
             'subscriber' => $this->subscriber,
             'create_time' => $this->createTime,
+            'billing_info' => $this->billingInfo?->toArray(),
             'links' => $this->links,
         ];
     }
