@@ -22,5 +22,13 @@ class Payment
         return new PaymentResponse($response);
     }      
     
+    // Method to get capture details
+    public function captureDetails(string $captureId): CaptureResponse
+    {
+        $response = $this->client->request('GET', "/v2/payments/captures/{$captureId}");
+
+        return new CaptureResponse($response);
+    }
+
     // extend with other methods if nessessary
 }
