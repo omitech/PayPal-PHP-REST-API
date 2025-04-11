@@ -8,6 +8,7 @@ use PayPalRestApi\Subscriptions\Subscription;
 use PayPalRestApi\Product\Product;
 use PayPalRestApi\Orders\Order;
 use PayPalRestApi\Webhook\Webhook;
+use PayPalRestApi\Payments\Payment;
 
 class PayPal
 {
@@ -15,6 +16,7 @@ class PayPal
     public Subscription $subscription;
     public Product $product;
     public Order $order;
+    public Payment $payment;
 
     private PayPalClient $client;
 
@@ -27,7 +29,7 @@ class PayPal
         $this->plan = new Plan($this->client);
         $this->subscription = new Subscription($this->client);
         $this->order = new Order($this->client);
-        
+        $this->payment = new Payment($this->client);        
     }
 
     public function getClient(): PayPalClient
