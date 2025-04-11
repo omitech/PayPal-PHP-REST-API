@@ -30,7 +30,7 @@ class SubscriptionResponse
         $this->createTime = $response['create_time'];
         $this->customId = $response['custom_id'];
         $this->links = $response['links'];
-        $this->billingInfo = new BillingInfoResponse($response['billing_info'] ?? []);
+        $this->billingInfo = ($response['billing_info']) ? new BillingInfoResponse($response['billing_info']) : null;
     }
 
     public function getId(): string

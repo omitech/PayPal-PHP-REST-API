@@ -18,8 +18,6 @@ class BillingInfoResponse
 
     public function __construct(array $billingInfo)
     {
-        if (empty($billingInfo)) return null;
-
         // Outstanding Balance
         $this->outstandingBalance = (float) ($billingInfo['outstanding_balance']['value'] ?? 0.0);
         $this->currency = $billingInfo['outstanding_balance']['currency_code'] ?? 'XXX';
