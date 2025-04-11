@@ -85,4 +85,21 @@ class SubscriptionResponse
     {
         return $this->links;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'status' => $this->status,
+            'status_update_time' => $this->statusUpdateTime,
+            'plan_id' => $this->planId,
+            'plan_overridden' => $this->planOverridden,
+            'start_time' => $this->startTime,
+            'quantity' => $this->quantity,
+            'shipping_amount' => $this->shippingAmount,
+            'subscriber' => $this->subscriber,
+            'create_time' => $this->createTime,
+            'links' => $this->links,
+        ];
+    }
 }
