@@ -31,5 +31,19 @@ class Payment
         return new CaptureResponse($response);
     }
 
+    // Method to refund the capture
+    public function refund(string $captureId, ?string $message = null): CaptureResponse
+    {
+        if (!empty($message)) {
+            $body = ['note_to_payer' => $message];
+        } else {
+            $body = null;
+        }
+
+        $response = $this->client->request('POST', "/v2/payments/captures/{$captureId}/refund", $body);
+
+        return new CaptureResponse($response);       
+    }
+
     // extend with other methods if nessessary
 }
