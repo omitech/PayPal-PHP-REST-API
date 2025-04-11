@@ -18,14 +18,14 @@ class Subscription
     {
         $response = $this->client->request('POST', '/v1/billing/subscriptions', $subscriptionData->toArray());
 
-        return new SubscriptionResponse($responseBody);
+        return new SubscriptionResponse($response);
     }
 
     public function get(string $subscriptionId): SubscriptionResponse
     {
         $response = $this->client->request('GET', "/v1/billing/subscriptions/{$subscriptionId}");
 
-        return new SubscriptionResponse($responseBody);
+        return new SubscriptionResponse($response);
     }
 
     public function cancel(string $subscriptionId, string $reason = ''): array
