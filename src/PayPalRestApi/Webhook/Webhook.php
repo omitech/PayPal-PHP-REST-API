@@ -44,6 +44,23 @@ class Webhook
     }
 
     /**
+     * Creates a new PayPal webhook.
+     *
+     * @param string $url The callback URL to receive events
+     * @param array $eventTypes Array of event types to subscribe to
+     * @return array|null Returns the created webhook data or null on failure
+     */
+    public function create(string $url, array $eventTypes): ?array
+    {
+        $data = [
+            'url' => $url,
+            'event_types' => array_map(fn($type) => ['name' => $type], $eventTypes),
+        ];
+
+        return $this->client->request('POST', '/v1/notifications/webhooks', $data);
+    }
+
+    /**
      * Parse the webhook payload.
      *
      * @param string $body Raw JSON body

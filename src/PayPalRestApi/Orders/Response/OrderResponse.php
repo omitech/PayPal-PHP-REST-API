@@ -4,6 +4,12 @@ namespace PayPalRestApi\Orders\Response;
 
 class OrderResponse
 {
+    const STATUS_COMPLETED = 'COMPLETED';
+    const STATUS_CREATED = 'CREATED';
+    const STATUS_APPROVED = 'APPROVED';
+    const STATUS_VOIDED = 'VOIDED';
+    const STATUS_PAYER_ACTION_REQUIRED = 'PAYER_ACTION_REQUIRED';
+    
     private string $id;
     private string $status;
     private ?string $payerEmail;

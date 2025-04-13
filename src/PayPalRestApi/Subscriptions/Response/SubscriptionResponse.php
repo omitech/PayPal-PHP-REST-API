@@ -6,6 +6,10 @@ use PayPalRestApi\Subscriptions\Response\BillingInfoResponse;
 
 class SubscriptionResponse
 {
+    public const STATUS_ACTIVE = 'ACTIVE';
+    public const STATUS_CREATED = 'CREATED';
+    public const STATUS_INACTIVE = 'INACTIVE';
+
     private string $id;
     private string $status;
     private string $statusUpdateTime;
