@@ -48,7 +48,7 @@ class Webhook
      *
      * @param string $url The callback URL to receive events
      * @param array $eventTypes Array of event types to subscribe to
-     * @return array|null Returns the created webhook data or null on failure
+     * @return array Returns the created webhook data or null on failure
      */
     public function create(string $url, array $eventTypes): ?array
     {
@@ -58,6 +58,36 @@ class Webhook
         ];
 
         return $this->client->request('POST', '/v1/notifications/webhooks', $data);
+    }
+
+    /**
+     * Retrieves the details of a specific PayPal webhook.
+     *
+     * @return array Returns the webhook details or null on failure
+     */
+    public function show(): array
+    {
+        return $this->client->request('GET', "/v1/notifications/webhooks/{$this->webhookId}");
+    }
+
+    /**
+     * Lists all available PayPal webhook event types.
+     *
+     * @return array Returns an array of event types or null on failure
+     */
+    public function listAvailableEvents(): array
+    {
+        return $this->client->request('GET', '/v1/notifications/webhooks-event-types');
+    }
+
+    /**
+     * Lists all webhooks created for the PayPal app.
+     *
+     * @return array Returns an array of webhooks or null on failure
+     */
+    public function listWebhooks(): ?array
+    {
+        return $this->client->request('GET', '/v1/notifications/webhooks');
     }
 
     /**
