@@ -2,6 +2,9 @@
 
 namespace PayPalRestApi\Webhook;
 
+/**
+ * full list of events https://developer.paypal.com/api/rest/webhooks/event-names/
+ */
 class EventTypes
 {
     public const BILLING_PLAN_CREATED = 'BILLING.PLAN.CREATED';
