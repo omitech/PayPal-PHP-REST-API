@@ -57,4 +57,18 @@ class ProductResponse
     {
         return $this->links;
     }
+
+        // Convert to array
+        public function toArray(): array
+        {
+            return [
+                'id' => $this->getId(),
+                'name' => $this->getName(),
+                'description' => $this->getDescription(),
+                'type' => $this->getType(),
+                'create_time' => $this->getCreateTime(),
+                'update_time' => $this->getUpdateTime(),
+                'links' => $this->getLinks(),
+            ];
+        }
 }
