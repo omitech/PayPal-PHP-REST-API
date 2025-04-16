@@ -6,8 +6,8 @@ class ProductResponse
 {
     private string $id;
     private string $name;
-    private string $description;
-    private string $type;
+    private ?string $description;
+    private ?string $type;
     private string $createTime;
     private string $updateTime;
     private array $links;
